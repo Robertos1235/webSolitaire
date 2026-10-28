@@ -1,0 +1,70 @@
+.wallpaperCard
+{
+    width: 95%;
+}
+/*Wrapper for game board*/
+.gameBoardWrapper
+{
+    display:flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8vh;
+}
+/*Wrapper for top part of game board*/
+.topPart
+{
+    display: flex;
+    width: 100%;
+}
+.bottomPart
+{
+    display:flex;
+    align-items: center;
+    gap: 1vw;
+}
+.card
+{
+    padding:0;
+    margin: 0;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    margin-top: -125px;
+}
+
+.drawPart, .finalPart
+{
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+}
+
+.finalPart
+{
+    margin-left: auto;
+}
+
+.pile
+{
+    width: 100px;
+    height: 144px;
+    padding: 0;
+    margin: 0;
+    border: 3px var(--cardText-border) dashed;
+    display:flex;
+    flex-direction: column;
+}
+
+.gamePile
+{
+    width: 100px;
+    min-height: 144px;
+    padding: 0;
+    margin: 0;
+    border: 3px var(--cardText-border) dashed;
+    display:flex;
+    flex-direction: column;
+    padding-top: 125px;
+}
