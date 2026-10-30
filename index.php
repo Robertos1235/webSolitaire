@@ -12,7 +12,7 @@
         <div class="wallpaperCard">
             <h1>Welcome Player!</h1>
             <div class="center">
-                <a href="/src/KingJoker.html" id="playGame">Play game!</a>
+                <a href="/src/KingJoker.php" id="playGame">Play game!</a>
             </div>
         </div>
     </div>

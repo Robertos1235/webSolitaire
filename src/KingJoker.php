@@ -13,7 +13,12 @@
                 <div class="topPart" id="topPart"></div>
                 <div class="bottomPart" id="bottomPart"></div>
             </div>
-            <script>drawMainPage(7,4);</script>
+            <script>
+                initializeDeck(1, true);
+                drawMainPage(7,4);
+                gameBoardDeck(7);
+                placeDeck();
+            </script>
         </div>
     </div>
 </body>
