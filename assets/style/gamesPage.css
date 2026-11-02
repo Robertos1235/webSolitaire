@@ -19,7 +19,7 @@
 .bottomPart
 {
     display:flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 1vw;
 }
 .gameCard
@@ -55,7 +55,7 @@
     margin-left: auto;
 }
 
-.pile
+.pile, .finalPile
 {
     width: 100px;
     height: 144px;
@@ -64,6 +64,9 @@
     border: 3px var(--cardText-border) dashed;
     display:flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
 }
 
 .gamePile
@@ -76,4 +79,6 @@
     display:flex;
     flex-direction: column;
     padding-top: 125px;
+    align-items: center;
+    justify-content: baseline;
 }

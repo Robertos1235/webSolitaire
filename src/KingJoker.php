@@ -3,7 +3,10 @@
 <head>
 	<title>King Joker</title>
     <link rel="stylesheet" type="text/css" href="/assets/style/gamesPage.css">
-    <script src="/src/scripts/main/mainLogic.js"></script>
+    <script src="/src/scripts/main/main.js"></script>
+    <script src="/src/scripts/main/display.js"></script>
+    <script src="/src/scripts/main/movement.js"></script>
+    <script src="/src/scripts/main/init.js"></script>
     <?php include $_SERVER['DOCUMENT_ROOT'] . "/src/include/header.php";?>
 </head>
 <body>
@@ -14,10 +17,7 @@
                 <div class="bottomPart" id="bottomPart"></div>
             </div>
             <script>
-                initializeDeck(1, true);
-                drawMainPage(7,4);
-                gameBoardDeck(7);
-                placeDeck();
+                init(1, 7, true);
             </script>
         </div>
     </div>
