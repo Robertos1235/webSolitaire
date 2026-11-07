@@ -74,3 +74,23 @@ body
     height: -webkit-fill-available;
     width: -webkit-fill-available;
 }
+
+.button
+{
+    color: var(--header_4);
+    margin: 0;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-sizing: border-box;
+    background-color: inherit;
+    padding: 1rem 2rem;    
+    border-radius: 15px;
+    border: 3px solid var(--cardText-border);
+}

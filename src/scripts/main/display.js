@@ -1,5 +1,5 @@
 /*Main function that creates game board*/
-function displayGameBoard(gamePiles, finalPiles)
+function displayGameBoard(gamePiles, finalPiles, isJoker)
 {
     const topPart = document.getElementById("topPart");
     const bottomPart = document.getElementById("bottomPart");
@@ -9,12 +9,12 @@ function displayGameBoard(gamePiles, finalPiles)
 
     const drawPile = document.createElement('div');
     drawPile.id = "drawPile";
-    drawPile.className = "pile";
+    drawPile.className = "drawPile";
     drawPile.draggable = false;
 
     const drawnPile = document.createElement('div');
     drawnPile.id = "drawnPile";
-    drawnPile.className = "pile";
+    drawnPile.className = "drawPile";
     drawnPile.draggable = false;
 
     drawPart.append(drawPile, drawnPile);
@@ -39,34 +39,45 @@ function displayGameBoard(gamePiles, finalPiles)
         const gamePile = document.createElement('div');
         gamePile.className = "finalPile";
         gamePile.draggable = false;
+        const idNumber = roundDown(counter / 4);
 
-        switch(finalPiles)
+        switch(counter % 4)
         {
-            case 4:
-
-                switch(counter)
-                {
-                    case 0:
-                        gamePile.id = "club";
-                    break;
-
-                    case 1:
-                        gamePile.id = "diamond";
-                    break;
-
-                    case 2:
-                        gamePile.id = "spade";
-                    break;
-
-                    case 3:
-                        gamePile.id = "heart";
-                    break;
-                }
-
+            case 0:
+                gamePile.id = "club-" + idNumber;
+                gamePile.innerHTML = "<span class=icon>&#9827</span>"
             break;
+
+            case 1:
+                gamePile.id = "diamond-" + idNumber;
+                gamePile.innerHTML = "<span class=icon>&#9830</span>"
+            break;
+
+            case 2:
+                gamePile.id = "spade-" + idNumber;
+                gamePile.innerHTML = "<span class=icon>&#9824</span>"
+            break;
+
+            case 3:
+                gamePile.id = "heart-" + idNumber;
+                gamePile.innerHTML = "<span class=icon>&#9829</span>"
+            break;
+                
         }
+        
         finalPart.append(gamePile);
     }
+
+    if(isJoker)
+    {
+        const jokerPile = document.createElement('div');
+        jokerPile.className = "jokerPile";
+        jokerPile.draggable = false;
+        jokerPile.id = "jokerPile";
+        jokerPile.innerHTML = "<span class=icon>J</span>";
+        finalPart.append(jokerPile);
+    }
+
 
     topPart.append(finalPart);
 }
@@ -108,9 +119,9 @@ function displayDrawPart()
     let isInDrawPile = false;
 
     drawPile.innerHTML = "";
+    drawnPile.innerHTML = "";
 
     const deck = gameDeck.filter(card => card.pile === "drawnPile" || card.pile === "drawPile");
-    console.log(deck);
 
     deck.forEach(card =>{
         if(card.pile === "drawPile" && isInDrawPile === false)
@@ -137,10 +148,67 @@ function displayDrawPart()
 /*Function that only reloads FinalPart*/
 function displayFinalPart()
 {
+    const finalPiles = document.getElementsByClassName("finalPile");
 
+    const deck = gameDeck.filter(card => card.isInFinal === true);
 
+    if(deck.length != 0)
+    {
+        sortDeck(deck);
+
+        for(let position = 0; position < finalPiles.length; position++)
+        {
+            if(finalPiles[position].childNodes.length === 1)
+            {
+                switch(position % 4)
+                {
+                    case 0:
+                        finalPiles[position].innerHTML = "<span class=icon>&#9827</span>"
+                    break;
+
+                    case 1:
+                        finalPiles[position].innerHTML = "<span class=icon>&#9830</span>"
+                    break;
+
+                    case 2:
+                        finalPiles[position].innerHTML = "<span class=icon>&#9824</span>"
+                    break;
+
+                    case 3:
+                        finalPiles[position].innerHTML = "<span class=icon>&#9829</span>"
+                    break;   
+                }
+            }
+            else
+            {
+                finalPiles[position].innerHTML = "";
+            }
+            
+        }
+
+        deck.forEach(card => {
+            const pileId = translatePileForDisplay(card.pile);
+            finalPiles[pileId].innerHTML = "";
+
+            placeCard(card.image, card.id, "card",finalPiles[pileId]);
+
+        });
+    }
 }
 
+/*Displays joker pile*/
+function displayJokerPile()
+{
+    const jokerPile = document.getElementById('jokerPile');
+
+    const deck = gameDeck.filter(card => card.pile === "jokerPile");
+
+    if(deck.length != 0)
+    {
+        jokerPile.innerHTML = "";
+        placeCard(deck[0].image, deck[0].id, "card",jokerPile);
+    }
+}
 /*Function that creates a card and appends it to specified place*/
 function placeCard(source, id, nameOfClass, placement)
 {
@@ -154,7 +222,68 @@ function placeCard(source, id, nameOfClass, placement)
     placement.append(image);
 }
 
-function sortDeck(array)
+function wonScreen()
 {
-    array.sort((a,b) => a.position - b.position);
+    const popUp = document.createElement('div');
+    popUp.className = "wonScreen";
+    popUp.id = "wonScreen";
+
+    const wonDisplay = document.createElement('div');
+    wonDisplay.className = "wonDisplay";
+
+    const header = document.createElement('h1');
+    header.textContent = "Congratulation you won";
+
+    const button = document.createElement('button');
+    button.className = "button";
+    button.textContent = "Play again"
+    button.onclick = restart;
+
+    wonDisplay.append(header, button);
+    popUp.append(wonDisplay)
+
+    document.body.append(popUp);
+}
+
+
+
+/*Function that translate the id of final pile to number for access by array of elements*/
+function translatePileForDisplay(pile)
+{
+    let retVal;
+    const pileId  = pile.split("-");
+
+    switch(pileId[0])
+    {
+        case "club":
+            retVal = 0;
+        break;
+
+        case "diamond":
+            retVal = 1;
+        break;
+
+        case "spade":
+            retVal = 2
+        break;
+
+        case "heart":
+            retVal = 3;
+        break;
+    }
+
+    if(Number(pileId[1]) != 0)
+    {
+        if(retVal != 0)
+        {
+            retVal *= Number(pileId[1]);
+        }
+        else
+        {
+            retVal = 3 * Number(pileId[1]) + Number(pileId[1]);
+        }
+        
+    }
+
+    return retVal;
 }

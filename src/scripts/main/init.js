@@ -4,6 +4,7 @@ function initializeDeck(numberOfDecks, areJokers)
     let id = 0;
     let type;
     let dir;
+    let cardColor;
 
     for(let typeOfCard = 0; typeOfCard < (4 * numberOfDecks); typeOfCard++)
     {
@@ -13,25 +14,28 @@ function initializeDeck(numberOfDecks, areJokers)
             case 0:
                 type = "club";
                 dir = CLUB;
+                cardColor = "black";
             break;
             case 1:
                 type = "diamond";
                 dir = DIAMOND;
+                cardColor = "red";
             break;
             case 2:
                 type = "heart";
                 dir = HEART;
+                cardColor = "red";
             break;
             case 3:
                 type = "spade";
                 dir = SPADE;
+                cardColor = "black";
             break;
         }
         for(let numberOfCard = 1; numberOfCard <= 13; numberOfCard++)
         {
             let imageLocation = dir + numberOfCard + "_" + type + ".png";
-            let cardName = numberOfCard + "_" + type;
-            shuffleDeck[id] = {location: imageLocation, name: cardName, cardNumber: numberOfCard, type: type};
+            shuffleDeck[id] = {location: imageLocation, cardNumber: numberOfCard, type: type, color: cardColor, isInFinal: false};
             id++;
         }
     }
@@ -42,12 +46,10 @@ function initializeDeck(numberOfDecks, areJokers)
         for(let currentJoker = 0; currentJoker < (2 * numberOfDecks); currentJoker++)
         {
             let imageLocation = SPECIAL + "joker.png";
-            let cardName = currentJoker + "_joker";
-            shuffleDeck[id] = {location: imageLocation, name: cardName};
+            shuffleDeck[id] = {location: imageLocation, cardNumber: null, type: "joker", color: "rainbow", isInFinal: false};
             id++;
         }
     }
-    console.log(shuffleDeck);
 }
 
 /*Places deck on the game board*/
@@ -83,13 +85,17 @@ function gameBoardDeck(numberOfPiles)
         gameDeck[id] = {
             id: id,
             image: card.location,
-            name: card.name,
+            cardNumber: card.cardNumber,
+            type: card.type,
             isShown: isItShown,
             pile: pile,
-            position: currentPosition
+            position: currentPosition,
+            color: card.color,
+            isInFinal: card.isInFinal
         };
 
-        if(currentPile === currentPosition && !isItToDrawPile)
+        if(currentPile === currentPosition 
+            && !isItToDrawPile)
         {
             currentPile++;
             currentPosition = 0;
@@ -111,14 +117,17 @@ function gameBoardDeck(numberOfPiles)
 /*Initialization*/
 function init(numberOfDecks, numberOfPiles, isJoker)
 {
+    restartInfo.numberOfDecks = numberOfDecks;
+    restartInfo.numberOfPiles = numberOfPiles;
+    restartInfo.isJoker = isJoker;
+    
     const numberOfFinalPiles = numberOfDecks * 4;
 
     initializeDeck(numberOfDecks, isJoker);
 
-    displayGameBoard(numberOfPiles, numberOfFinalPiles);
+    displayGameBoard(numberOfPiles, numberOfFinalPiles, isJoker);
 
     gameBoardDeck(numberOfPiles);
-    console.log(gameDeck);
     displayGamePart();
 
     displayDrawPart();
@@ -126,4 +135,5 @@ function init(numberOfDecks, numberOfPiles, isJoker)
     mainMovement();
 
     drawDeck();
+
 }

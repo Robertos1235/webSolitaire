@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php include $_SERVER['DOCUMENT_ROOT'] . "/src/include/header.php";?>
 	<title>Main page</title>
-    <link rel="stylesheet" type="text/css" href="/assets/style/mainStyle.css">
     <link rel="stylesheet" type="text/css" href="/assets/style/mainPage.css">
+    <script src="/src/scripts/mainPage.js" defer></script>
 </head>
 <body>
     <div class="mainWrapper">
         <div class="wallpaperCard">
             <h1>Welcome Player!</h1>
-            <div class="center">
-                <a href="/src/KingJoker.php" id="playGame">Play game!</a>
+            <div class="chooseGame">
+                <a href="/games/KingJoker.php" class="button" id="playGame">Play game!</a>
+                <select id="select"></select>
             </div>
         </div>
     </div>

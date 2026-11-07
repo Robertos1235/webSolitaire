@@ -31,7 +31,7 @@
     -moz-user-select: none;
     -o-user-select: none;
     user-select: none;
-    margin-top: -125px;
+    margin-top: -105px;
 }
 .card
 {
@@ -55,30 +55,64 @@
     margin-left: auto;
 }
 
-.pile, .finalPile
+.pile, .finalPile, .gamePile, .drawPile, .jokerPile
 {
-    width: 100px;
-    height: 144px;
-    padding: 0;
-    margin: 0;
-    border: 3px var(--cardText-border) dashed;
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-}
-
-.gamePile
-{
-    width: 100px;
+    min-width: 100px;
     min-height: 144px;
     padding: 0;
     margin: 0;
     border: 3px var(--cardText-border) dashed;
     display:flex;
     flex-direction: column;
-    padding-top: 125px;
+}
+
+.drawPile 
+{
+    max-width: 100px;
+    max-height: 144px;
+}
+
+.pile, .finalPile, .jokerPile
+{
+    align-items: center;
+    justify-content: center;
+}
+
+.gamePile
+{
+    padding-top: 105px;
     align-items: center;
     justify-content: baseline;
+    min-height: 468px;
+}
+
+.active 
+{
+    -webkit-box-shadow:0px 0px 25px 17px rgba(224,255,46,0.76);
+    -moz-box-shadow: 0px 0px 25px 17px rgba(224,255,46,0.76);
+    box-shadow: 0px 0px 25px 17px rgba(224,255,46,0.76);
+
+}
+
+.wonScreen
+{
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    display:flex;
+}
+
+.wonDisplay
+{    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 15vh 10vw;
+    border: solid 5px var(--cardText-border);
+    border-radius: 15px;
+    background-color: rgba(98, 93, 111, 0.5);
 }

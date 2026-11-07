@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>King Joker</title>
+	<title>Klondike</title>
     <link rel="stylesheet" type="text/css" href="/assets/style/gamesPage.css">
     <script src="/src/scripts/main/main.js"></script>
     <script src="/src/scripts/main/display.js"></script>
@@ -11,13 +11,13 @@
 </head>
 <body>
     <div class="mainWrapper">
-        <div class="wallpaperCard">
+        <div class="wallpaperCard" id="gameBoard">
             <div class="gameBoardWrapper">
                 <div class="topPart" id="topPart"></div>
                 <div class="bottomPart" id="bottomPart"></div>
             </div>
             <script>
-                init(1, 7, true);
+                init(1, 7, false);
             </script>
         </div>
     </div>

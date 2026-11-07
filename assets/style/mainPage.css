@@ -11,17 +11,17 @@ h3
     margin: 0 5vw;
 
 }
-.text
+
+.chooseGame
 {
-    display:flex;
-    flex-direction: column;
-    gap: 3vh;
-    float: left;
-    width: -webkit-fill-available;
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
 }
 
-.text > p
+select
 {
-    padding:0;
-    margin: 0 5vw;
+    background-color: inherit;
+    color: inherit;
+    border-radius: 15px;
 }
