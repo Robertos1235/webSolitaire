@@ -1,0 +1,27 @@
+h1
+{
+    color: var(--header_1);
+    font-size: 5rem;
+}
+h3
+{
+    color: var(--header_3);
+    font-size: 2rem;
+    padding:0;
+    margin: 0 5vw;
+
+}
+
+.chooseGame
+{
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+}
+
+select
+{
+    background-color: inherit;
+    color: inherit;
+    border-radius: 15px;
+}
